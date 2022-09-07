@@ -10,7 +10,7 @@ Default parameters: __25__ min session For __1__ round (__5__ min Break)
 ```sh
 pomo
 ```
-Specifiy the parameters:
+Specify the parameters:
 
 ```sh
 pomo 25 4
@@ -18,3 +18,10 @@ pomo 25 4
 pomo 50 2 
 ```
 > Supports notifications using `notify-send`
+
+### Installation
+
+```sh
+git clone https://github.com/AnasBoubechra/bash-pomodoro.git
+cd bash-pomodoro && chmod +x pomo && ./pomo
+```
