@@ -13,11 +13,11 @@ NOTIFIER="notify-send"
 PURPLE='\033[1;95m'
 YELLOW='\033[1;93m'
 WHITE='\033[1;97m' 
+RED='\033[1;91m'
 ################################################
 
 
-timer(){
-    local SEC=0
+timer(){ local SEC=0
     
     # Assigning the value of the global variable to the local one
     local POMO=$POMO   
@@ -44,7 +44,18 @@ timer(){
         let POMO--
     done
 }
-
+checkinput(){
+    isanum='^[0-9]+$'                   
+    for i in $@;do 
+        if ! [[ $i =~ $isanum ]] ; then   
+            echo -e "$RED Error: (sessions|rounds) must be a positive, whole number."
+          exit 1
+        elif [ $i -eq "0" ]; then          
+          echo -e "$RED Error: (sessions|rounds) must be greater than zero."
+          exit 1
+        fi
+    done
+}
 sessions(){
     for (( c=1; c <= $SESS ; c++ ))
     do
@@ -75,6 +86,6 @@ case $1 in
         echo -e "\n${WHITE}Example${NC} pomo 25 2"
         ;;
     *)
-        sessions
+        checkinput $1 $2 && sessions
         ;;
 esac
