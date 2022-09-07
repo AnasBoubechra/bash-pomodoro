@@ -3,7 +3,7 @@
 
 A simple pomodoro timer written in bash
 
-###Usage:
+### Usage:
 
 Default parameters: __25__ min session For __1__ round (__5__ min Break)
 
