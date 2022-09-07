@@ -81,7 +81,7 @@ _EOF_
 )"
 }
 case $1 in
-    -h|--h)
+    -h|--help)
         echo -e "${WHITE}Usage:${NC} pomo duration sessions"
         echo -e "\n${WHITE}Example${NC} pomo 25 2"
         ;;

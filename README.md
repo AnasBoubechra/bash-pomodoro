@@ -4,7 +4,9 @@
 A simple pomodoro timer written in bash
 
 ### Usage:
-
+```sh
+pomo --help #Or pomo -h
+```
 Default parameters: __25__ min session For __1__ round (__5__ min Break)
 
 ```sh
