@@ -17,7 +17,8 @@ RED='\033[1;91m'
 ################################################
 
 
-timer(){ local SEC=0
+timer(){ 
+    local SEC=0
     
     # Assigning the value of the global variable to the local one
     local POMO=$POMO   
