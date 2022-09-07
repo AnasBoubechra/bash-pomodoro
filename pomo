@@ -1,0 +1,80 @@
+#!/bin/bash 
+
+# Author: CSCHAD ( ANAS BOUBECHRA )
+# git: git.b-anas.me 
+# github: https://github.com/AnasBoubechra
+
+
+############### Global variables ################
+POMO=${1:-25};
+BREAK=$((POMO/5))
+SESS=${2:-1};
+NOTIFIER="notify-send"
+PURPLE='\033[1;95m'
+YELLOW='\033[1;93m'
+WHITE='\033[1;97m' 
+################################################
+
+
+timer(){
+    local SEC=0
+    
+    # Assigning the value of the global variable to the local one
+    local POMO=$POMO   
+    clear
+    # Underline characters
+    tput smul               
+    echo -e "\t\t\t${WHITE}Started at: $(date +"%H:%M")\tSessions: $SESS\tFinish at: $(date -d"now +$((SESS*(POMO+BREAK))) minutes" +"%H:%M")"
+    # Remove the line effect
+    tput rmul    
+    # replace the cursor to the follwing coordinates
+    tput cup $(($(tput lines)/3)) $(($(tput cols)/5)) 
+    # Store the cursor position
+    tput sc                  
+        while [ $POMO -ge 0 ]; do
+            while [ $SEC -ge 0 ]; do
+                # clear the line on each iteration 
+                tput rc               
+                tput ed
+                format $POMO $SEC
+                let SEC-- 
+                sleep 1
+            done
+            SEC=59
+        let POMO--
+    done
+}
+
+sessions(){
+    for (( c=1; c <= $SESS ; c++ ))
+    do
+       if test $c -eq $SESS; then
+       		$NOTIFIER  "POMO" "This is the last session"
+       fi
+
+    $NOTIFIER "POMODORO" "Starting the $POMO session !" && timer
+    sleep 1 && $NOTIFIER "POMODORO" "Take a break !" && sleep $BREAK
+    $NOTIFIER "Pomodoro" "Break completed, Get back to work !"
+done
+
+}
+format(){
+echo -e "$(
+cat <<- _EOF_
+                ------------------------------
+                                       |                            |
+                                                   ${NC}${PURPLE}$1${NC}${YELLOW}:${NC}${PURPLE}$2${NC}
+                                       |                            |
+                                       ------------------------------
+_EOF_
+)"
+}
+case $1 in
+    -h|--h)
+        echo -e "${WHITE}Usage:${NC} pomo duration sessions"
+        echo -e "\n${WHITE}Example${NC} pomo 25 2"
+        ;;
+    *)
+        sessions
+        ;;
+esac
