@@ -83,8 +83,8 @@ _EOF_
 }
 case $1 in
     -h|--help)
-        echo -e "${WHITE}Usage:${NC} pomo duration sessions"
-        echo -e "\n${WHITE}Example${NC} pomo 25 2"
+        echo -e "\n${WHITE}Usage:${NC} pomo duration sessions"
+        echo -e "\n${WHITE}Example:${NC} pomo 25 2"
         ;;
     *)
         checkinput $1 $2 && sessions
